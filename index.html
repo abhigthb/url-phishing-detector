@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Phishing Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Phishing <span>Detector</span></h1>
+            <p>Heuristic & Global API Threat Analysis</p>
+        </header>
+
+        <main>
+            <div class="search-box">
+                <input type="text" id="urlInput" placeholder="Enter a URL to scan (e.g., paypal-secure.com)" autocomplete="off">
+                <button id="scanBtn">Scan URL</button>
+            </div>
+
+            <div id="loader" class="hidden">
+                <div class="spinner"></div>
+                <p>Analyzing threat vectors...</p>
+            </div>
+
+            <div id="resultPanel" class="hidden">
+                <div id="statusBadge" class="badge"></div>
+                <ul id="issueList"></ul>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
