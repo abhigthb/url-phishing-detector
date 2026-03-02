@@ -130,7 +130,7 @@ Happy (and safe) scanning! 🛡️ -->
 
 # 🛡️ PHISHGUARD - URL Phishing Detector
 
-Advanced heuristic-based phishing URL scanner with **killer cyberpunk UI**. Built for Vercel deployment.
+Advanced heuristic-based phishing URL scanner. Built for Vercel deployment.
 
 ## Features
 - Real-time heuristic analysis (10+ checks)
