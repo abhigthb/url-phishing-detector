@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-zinc-950 text-emerald-400">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHISHGUARD • CYBER DEFENSE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        body { font-family: 'VT323', monospace; }
+        .neon-glow { text-shadow: 0 0 20px #10b981, 0 0 40px #10b981; }
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(transparent, #10b981, transparent);
+            animation: scan 4s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes scan { 0% { top: -10px; } 100% { top: 100%; } }
+        .terminal-input {
+            font-family: monospace;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #10b981;
+        }
+        .glitch {
+            animation: glitch 1s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-hidden relative">
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix" class="fixed inset-0 z-[-1] opacity-30 pointer-events-none"></canvas>
+
+    <div class="max-w-4xl mx-auto p-6 relative z-10">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-12 border-b border-emerald-900 pb-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-3xl shadow-[0_0_30px_#10b981]">🛡️</div>
+                <div>
+                    <h1 class="text-6xl font-bold tracking-widest neon-glow text-white">PHISH<span class="text-rose-500">GUARD</span></h1>
+                    <p class="text-emerald-600 text-xl -mt-2">ZERO-TRUST URL SCANNER v4.20</p>
+                </div>
+            </div>
+            <div class="text-right">
+                <div class="text-amber-400 text-sm flex items-center gap-2 justify-end">
+                    <span class="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></span>
+                    LIVE THREAT INTEL
+                </div>
+                <div class="text-xs text-zinc-500">HEURISTIC ENGINE • NO API KEYS • 100% CLIENT-SIDE + SERVER</div>
+            </div>
+        </div>
+
+        <!-- Main Scanner -->
+        <div class="bg-zinc-900 border-4 border-emerald-500 p-10 rounded-xl shadow-[0_0_60px_rgba(16,185,129,0.3)] relative overflow-hidden">
+            <div class="scan-line"></div>
+            
+            <div class="text-center mb-10">
+                <h2 class="text-5xl font-bold text-white mb-2 tracking-widest">ENTER TARGET URL</h2>
+                <p class="text-emerald-500 text-xl">Advanced heuristic phishing &amp; typosquatting detection</p>
+            </div>
+
+            <form id="checkForm" class="flex flex-col md:flex-row gap-4">
+                <input 
+                    type="text" 
+                    id="urlInput"
+                    placeholder="https://secure-bank-login.com.attacker.tk"
+                    class="terminal-input flex-1 px-6 py-5 text-2xl text-white placeholder-zinc-500 focus:outline-none focus:border-rose-500 rounded-lg"
+                >
+                <button 
+                    type="submit"
+                    id="scanBtn"
+                    class="bg-emerald-600 hover:bg-emerald-500 text-black font-bold text-3xl px-16 py-5 rounded-lg transition-all active:scale-95 flex items-center gap-3 group shadow-[0_0_30px_#10b981]"
+                >
+                    <span>SCAN</span>
+                    <i class="fas fa-bolt group-active:rotate-12 transition"></i>
+                </button>
+            </form>
+
+            <!-- Result Area -->
+            <div id="result" class="hidden mt-10">
+                <div id="statusCard" class="border-4 p-8 rounded-2xl transition-all">
+                    <div class="flex items-center justify-between mb-6">
+                        <div id="statusBadge" class="px-8 py-3 text-4xl font-bold rounded-xl"></div>
+                        <div id="scoreContainer" class="text-right">
+                            <div class="text-xs text-zinc-400 tracking-widest">THREAT SCORE</div>
+                            <div id="score" class="text-7xl font-bold text-white"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="message" class="text-3xl mb-8 font-bold"></div>
+                    
+                    <div class="bg-black/50 p-6 rounded-xl">
+                        <div class="text-emerald-300 text-xl mb-4 flex items-center gap-2">
+                            <i class="fas fa-list-check"></i> DETECTION LOG
+                        </div>
+                        <ul id="reasonsList" class="space-y-3 text-lg"></ul>
+                    </div>
+                </div>
+
+                <div class="flex gap-4 mt-6">
+                    <button onclick="resetForm()" 
+                            class="flex-1 border border-zinc-700 hover:border-emerald-500 py-4 text-xl transition">
+                        SCAN ANOTHER
+                    </button>
+                    <button onclick="window.location.reload()" 
+                            class="flex-1 bg-zinc-800 hover:bg-zinc-700 py-4 text-xl transition">
+                        <i class="fas fa-shield-alt"></i> REPORT TO THREAT DB (DEMO)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="mt-16 text-center text-xs text-zinc-500 space-y-2">
+            <p>⚠️ This is a heuristic tool. Always verify manually. False positives/negatives possible.</p>
+            <p>Built with ❤️ for cyber defense • Deployed on Vercel • Pure Python + Tailwind</p>
+            <p class="text-emerald-600">Made for large-scale project showcase • 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already loaded via CDN
+        function initTailwind() {
+            // Already configured via CDN
+        }
+
+        // Matrix Rain Background
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        const chars = '01アイウエオカキクケコ01アイウエオカキクケコ01';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#10b981';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 35);
+
+        window.addEventListener('resize', () => {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        });
+
+        // Form handling
+        const form = document.getElementById('checkForm');
+        const resultDiv = document.getElementById('result');
+        const statusBadge = document.getElementById('statusBadge');
+        const scoreEl = document.getElementById('score');
+        const messageEl = document.getElementById('message');
+        const reasonsList = document.getElementById('reasonsList');
+        const statusCard = document.getElementById('statusCard');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) return;
+
+            // Loading state
+            const btn = document.getElementById('scanBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="animate-pulse">SCANNING...</span>`;
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('/api/check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const data = await response.json();
+
+                if (data.error) throw new Error(data.error);
+
+                // Show result
+                resultDiv.classList.remove('hidden');
+                
+                // Status badge
+                statusBadge.textContent = data.status;
+                statusBadge.className = `px-8 py-3 text-4xl font-bold rounded-xl bg-${data.color}-900 text-${data.color}-400 border-4 border-${data.color}-500`;
+                
+                // Score
+                scoreEl.textContent = data.score + '%';
+                scoreEl.className = `text-7xl font-bold ${data.color === 'rose' ? 'text-rose-400' : data.color === 'amber' ? 'text-amber-400' : 'text-emerald-400'}`;
+                
+                // Message
+                messageEl.textContent = data.message;
+                messageEl.className = `text-3xl mb-8 font-bold ${data.color === 'rose' ? 'text-rose-400' : data.color === 'amber' ? 'text-amber-400' : 'text-emerald-400'}`;
+                
+                // Reasons
+                reasonsList.innerHTML = '';
+                data.reasons.forEach(reason => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-3';
+                    li.innerHTML = `<span class="text-2xl mt-1">•</span><span>${reason}</span>`;
+                    reasonsList.appendChild(li);
+                });
+
+                // Card color
+                statusCard.className = `border-4 p-8 rounded-2xl transition-all border-${data.color}-500 bg-zinc-950`;
+
+                // Glitch effect on malicious
+                if (data.status === 'MALICIOUS') {
+                    statusBadge.classList.add('glitch');
+                }
+
+            } catch (err) {
+                alert('Error: ' + err.message);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        function resetForm() {
+            resultDiv.classList.add('hidden');
+            document.getElementById('urlInput').value = '';
+            document.getElementById('urlInput').focus();
+        }
+
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.getElementById('result').classList.contains('hidden')) {
+                e.preventDefault();
+                document.getElementById('urlInput').focus();
+            }
+        });
+
+        // Auto-focus input
+        window.onload = () => {
+            document.getElementById('urlInput').focus();
+        };
+    </script>
+</body>
+</html>
