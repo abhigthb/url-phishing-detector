@@ -36,7 +36,7 @@ https://github.com/abhigthb/url-phishing-detector
 5. **No configuration needed** — Vercel auto-detects Flask apps
 6. Click **Deploy**
 
-Your phishing detector will be live at:  
+Phishing detector will be live at:  
 `https://url-phishing-detector-ab.vercel.app/`
 
 ## 🔧 Local Installation
