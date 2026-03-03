@@ -1,159 +1,132 @@
-<!-- # 🛡️ URL Phishing Detector (Hybrid Model)
+# 🛡️ PHISHGUARD – URL Phishing Detector
 
-[![GitHub stars](https://img.shields.io/github/stars/abhigthb/url-phishing-detector?style=social)](https://github.com/abhigthb/url-phishing-detector/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/abhigthb/url-phishing-detector?style=social)](https://github.com/YOUR_USERNAME/url-phishing-detector/network/members)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
+Advanced **heuristic-based phishing URL scanner** with a cyberpunk / terminal-style interface.  
+Detects suspicious patterns, typosquatting, malicious TLDs, credential phishing tricks, and more — **no external APIs required**.
 
-A robust, modular Python-based tool for detecting potentially malicious URLs. This hybrid model combines **local heuristic pattern scanning** with real-time threat intelligence from **VirusTotal**, helping to identify both emerging zero-day phishing attempts and established threats.
+Live demo-friendly deployment on **Vercel** (Flask + Python).
 
-Built with clean, maintainable code — perfect for cybersecurity enthusiasts, developers, and as a strong portfolio piece demonstrating API integration, modular design, and security thinking.
+https://github.com/abhigthb/url-phishing-detector
 
-## Table of Contents
+## ✨ Features
 
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-- [How It Works](#how-it-works)
-- [Contributing](#contributing)
-- [License](#license)
-- [Disclaimer](#disclaimer)
-- [Acknowledgments](#acknowledgments)
-
-## Features
-
-- **Heuristic-Based Analysis**  
-  Detects modern phishing techniques:  
-  • Brand typosquatting (`g00gle.com`, `faceb00k-support.net`)  
-  • Raw IP address masking  
-  • Suspicious URL length & structure  
-  • URL encoding tricks & subdomain abuse
-
-- **Real-Time Global Threat Intelligence**  
-  Cross-references URLs against 70+ security vendors via **VirusTotal v3 API**
-
-- **Modular & Extensible Architecture**  
-  Clean separation between CLI interface and detection logic — easy to extend, test, or integrate
-
-- **Smart Brand Protection**  
-  Safely ignores official domains (`www.google.com`, `login.microsoftonline.com`)  
-  Aggressively flags impersonators (`google-secure-login-update.com`, `micros0ft-login.net`)
-
-- **Interactive Command-Line Interface**  
-  Quick scanning without needing any GUI
-
-- **Educational & Well-Documented**  
-  Detailed code comments explaining both security concepts and implementation choices
-
-## Project Structure
-url-phishing-detector/
-    
-    ├── README.md              # This file — project documentation
-    ├── main.py                # Entry point + interactive CLI
-    └── detector/
-        ├── init.py
-        └── scanner.py         # Core detection logic (heuristics + VirusTotal)
-
-## Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/abhigthb/url-phishing-detector.git
-   cd url-phishing-detector
-
-2. **Install dependencies**
-  ```bash
-  pip install requests
-  
-3. **Add your VirusTotal API key**
-  ```bash
-  → Go to https://www.virustotal.com/gui/my-apikey
-  → Copy your free/public API key
-  → Open detector/scanner.py
-  → Replace "YOUR_FREE_VIRUSTOTAL_KEY" with your real key
+- 10+ heuristic detection rules  
+- Typosquatting detection (string similarity to popular brands)  
+- Suspicious TLDs, IP-based domains, @ symbol tricks, subdomain abuse  
+- HTTP vs HTTPS check, keyword analysis, double-slash obfuscation  
+- Stunning cyber-security themed UI with Matrix rain, neon glow, glitch effects  
+- Real-time results with threat score & detailed explanation  
+- Fully responsive + mobile friendly  
+- Zero external dependencies beyond Flask  
+- One-click Vercel deployment
 
 
+## 🛠️ Tech Stack
 
-**Security Note:**
-Never commit your real API key to GitHub.
-Consider using environment variables + python-dotenv in future versions.
+- **Backend**: Python 3 + Flask  
+- **Frontend**: HTML + Tailwind CSS (via CDN) + Vanilla JavaScript  
+- **Deployment**: Vercel (Python serverless functions)  
+- **Styling**: Matrix rain canvas, neon text-shadow, glitch animation
 
-**Usage**
-python main.py
+## 🚀 Quick Start – Vercel (Recommended)
 
-Enter a URL to scan (or type 'quit' to exit):
-> https://fakebank-login-secure.com
+1. Fork or clone this repository
+2. Push to your GitHub account
+3. Go to https://vercel.com → **New Project** → Import Git Repository
+4. Select your repository
+5. **No configuration needed** — Vercel auto-detects Flask apps
+6. Click **Deploy**
 
- Analyzing...
-[Heuristics]
- • Suspicious domain length
- • Potential typosquatting / brand impersonation
+Your phishing detector will be live at:  
+`https://url-phishing-detector-ab.vercel.app/`
 
-[VirusTotal]
- • 7/72 engines flagged this URL as malicious
+## 🔧 Local Installation
 
-Verdict: HIGH RISK — Do NOT visit this link!
+### Prerequisites
 
-**How It Works**
+- Python 3.8+
+- pip
+- git (optional)
 
-Fast local heuristics — zero API calls, instant feedback
-URL → VirusTotal hash lookup — privacy-friendly (doesn't send full URL in most cases)
-Combines both signals → gives reasoned verdict with explainable red flags
-Protects legitimate domains → reduces false positives on real banking / login pages
+### Steps
 
-**Contributing**
-Pull requests are welcome!
-
-Fork the repo
-Create your feature branch (git checkout -b feature/amazing-heuristic)
-Commit your changes (git commit -m 'Add punycode detection')
-Push to the branch (git push origin feature/amazing-heuristic)
-Open a Pull Request
-
-**License**
-MIT License
-
-**Disclaimer**
-This tool is created for educational purposes, security awareness demonstrations, and portfolio showcase.
-It is not a replacement for commercial security products, enterprise URL filtering gateways, endpoint protection, or professional threat intelligence platforms.
-Use responsibly. Results should be treated as indicators — not final verdicts.
-Acknowledgments
-
-VirusTotal — for the excellent free API tier
-Open-source cybersecurity & OSINT community
-Everyone who has ever shared phishing indicators publicly
-
-Happy (and safe) scanning! 🛡️ -->
-
-
-# 🛡️ PHISHGUARD - URL Phishing Detector
-
-Advanced heuristic-based phishing URL scanner. Built for Vercel deployment.
-
-## Features
-- Real-time heuristic analysis (10+ checks)
-- Typosquatting detection using string similarity
-- Suspicious TLDs, IP addresses, @ symbols, subdomains, keywords
-- Stunning cyber security UI with Matrix rain background, neon glows, glitch effects
-- Fully responsive + mobile-ready
-- Zero external APIs – pure heuristics
-- Deployable in **one click** on Vercel
-
-## Tech Stack
-- **Backend**: Python + Flask (Vercel Python Runtime)
-- **Frontend**: HTML + Tailwind CSS (CDN) + Vanilla JS
-- **Deployment**: Vercel (zero config Flask support)
-
-## Local Development
 ```bash
-# Clone repo
-git clone https://github.com/yourusername/url-phishing-detector.git
+# 1. Clone the repository
+git clone https://github.com/abhigthb/url-phishing-detector.git
 cd url-phishing-detector
 
-# Install dependencies
+# 2. Create & activate virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate    # Linux / macOS
+venv\Scripts\activate       # Windows
+
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# Run
+# 4. Run the application
 python app.py
+
+```
+## 🎯 Usage
+
+- Enter any URL (with or without http/https)
+- Click SCAN
+- View instant result:
+- MALICIOUS (red) → high confidence phishing attempt
+- SUSPICIOUS (amber) → proceed with caution
+- SAFE (green) → no major red flags found
+
+
+Note: This is a heuristic tool — always verify suspicious links manually. False positives and negatives are possible.
+
+## ⚙️ Heuristics Currently Implemented
+
+- Very long URLs
+- Raw IP address instead of domain
+- @ symbol in URL
+- Excessive subdomains
+- Free/suspicious TLDs (.tk, .ml, .ga, .cf, .xyz, ...)
+- HTTP instead of HTTPS
+- Typosquatting (similarity to google, paypal, amazon, etc.)
+- High-risk keywords (login, verify, account, billing, ...)
+- Excessive hyphens in domain
+- Suspicious double-slash patterns
+
+## 🤝 Contributing
+Contributions are welcome!
+
+### How to contribute
+
+- Fork the repository
+- Create a feature branch (git checkout -b feature/amazing-feature)
+- Commit your changes (git commit -m 'Add some amazing feature')
+- Push to the branch (git push origin feature/amazing-feature)
+- Open a Pull Request
+
+### Ideas for contributions
+
+- Add more brand names for typosquatting detection
+- Improve UI/UX (more animations, dark mode toggle, sound effects, ...)
+- Add export report feature (PDF/JSON)
+- Implement domain age / WHOIS lookup warning (if API becomes available)
+- Add URL decoding / redirect following simulation
+- Write tests (pytest)
+
+## 📄 License
+
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+```bash
+MIT License
+
+Copyright (c) 2026 Abhinav
+
+Permission is hereby granted, free of charge, to any person obtaining a copy...
+```
+
+## ⚠️ Disclaimer
+- This tool is provided for educational and demonstration purposes only.
+- It should not be used as the sole method to determine whether a link is safe.
+- Always use official security software, browser protections, and your own judgment.
+
+
+### Built with ❤️ for cyber security enthusiasts
