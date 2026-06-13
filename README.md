@@ -19,27 +19,6 @@ https://github.com/abhigthb/url-phishing-detector
 - Zero external dependencies beyond Flask  
 - One-click Vercel deployment
 
-## 📸 Screenshots
-
-### Input Screen – Enter suspicious URL
-<p align="center">
-  <img src="C:\Users\KIIT0001\Pictures\Screenshots\Screenshot 2026-03-03 143502.png" alt="PHISHGUARD input screen with cyberpunk UI" width="80%">
-</p>
-
-### Malicious Result – High threat detected
-<p align="center">
-  <img src="./Screenshots/Screenshot 2026-03-03 143559.png" alt="Malicious URL detection result in red" width="80%">
-</p>
-
-### Safe Result – No red flags
-<p align="center">
-  <img src="./screenshots/safe-result.png" alt="Safe URL result in green" width="80%">
-</p>
-
-### Mobile View
-<p align="center">
-  <img src="./screenshots/mobile-view.png" alt="PHISHGUARD mobile responsive view" width="50%">
-</p>
 
 ## 🛠️ Tech Stack
 
