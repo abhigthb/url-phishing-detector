@@ -39,36 +39,33 @@
         }
     </style>
 </head>
-<body class="min-h-screen overflow-hidden relative">
-    <!-- Matrix Rain Background -->
+<body class="min-h-screen overflow-x-hidden relative">
     <canvas id="matrix" class="fixed inset-0 z-[-1] opacity-30 pointer-events-none"></canvas>
 
     <div class="max-w-4xl mx-auto p-6 relative z-10">
-        <!-- Header -->
         <div class="flex justify-between items-center mb-12 border-b border-emerald-900 pb-6">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center text-3xl shadow-[0_0_30px_#10b981]">🛡️</div>
                 <div>
                     <h1 class="text-6xl font-bold tracking-widest neon-glow text-white">PHISH<span class="text-rose-500">GUARD</span></h1>
-                    <p class="text-emerald-600 text-xl -mt-2">ZERO-TRUST URL SCANNER v4.20</p>
+                    <p class="text-emerald-600 text-xl -mt-2">ZERO-TRUST URL SCANNER v1.0-ML</p>
                 </div>
             </div>
             <div class="text-right">
                 <div class="text-amber-400 text-sm flex items-center gap-2 justify-end">
                     <span class="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></span>
-                    LIVE THREAT INTEL
+                    HYBRID INTEL ENGINE Active
                 </div>
-                <div class="text-xs text-zinc-500">HEURISTIC ENGINE • NO API KEYS • 100% CLIENT-SIDE + SERVER</div>
+                <div class="text-xs text-zinc-500">16 SIGNAL REGISTRY • ML CLASSIFIER • OFFLINE HEURISTICS</div>
             </div>
         </div>
 
-        <!-- Main Scanner -->
         <div class="bg-zinc-900 border-4 border-emerald-500 p-10 rounded-xl shadow-[0_0_60px_rgba(16,185,129,0.3)] relative overflow-hidden">
             <div class="scan-line"></div>
             
             <div class="text-center mb-10">
                 <h2 class="text-5xl font-bold text-white mb-2 tracking-widest">ENTER TARGET URL</h2>
-                <p class="text-emerald-500 text-xl">Advanced heuristic phishing &amp; typosquatting detection</p>
+                <p class="text-emerald-500 text-xl">Modular 15-Class Heuristics Registry &amp; Predictive Core</p>
             </div>
 
             <form id="checkForm" class="flex flex-col md:flex-row gap-4">
@@ -88,55 +85,67 @@
                 </button>
             </form>
 
-            <!-- Result Area -->
-            <div id="result" class="hidden mt-10">
+            <div id="result" class="hidden mt-10 space-y-6">
                 <div id="statusCard" class="border-4 p-8 rounded-2xl transition-all">
                     <div class="flex items-center justify-between mb-6">
                         <div id="statusBadge" class="px-8 py-3 text-4xl font-bold rounded-xl"></div>
                         <div id="scoreContainer" class="text-right">
-                            <div class="text-xs text-zinc-400 tracking-widest">THREAT SCORE</div>
+                            <div class="text-xs text-zinc-400 tracking-widest">THREAT WEIGHT SCORE</div>
                             <div id="score" class="text-7xl font-bold text-white"></div>
                         </div>
                     </div>
                     
                     <div id="message" class="text-3xl mb-8 font-bold"></div>
                     
-                    <div class="bg-black/50 p-6 rounded-xl">
-                        <div class="text-emerald-300 text-xl mb-4 flex items-center gap-2">
-                            <i class="fas fa-list-check"></i> DETECTION LOG
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-black/50 p-6 rounded-xl border border-zinc-800">
+                            <div class="text-emerald-300 text-xl mb-4 flex items-center gap-2">
+                                <i class="fas fa-list-check"></i> PRIMARY HEURISTIC LOG (TOP RISK SIGNALS)
+                            </div>
+                            <ul id="reasonsList" class="space-y-3 text-lg"></ul>
                         </div>
-                        <ul id="reasonsList" class="space-y-3 text-lg"></ul>
+
+                        <div class="bg-black/50 p-6 rounded-xl border border-zinc-800 flex flex-col justify-between">
+                            <div>
+                                <div class="text-purple-400 text-xl mb-4 flex items-center gap-2">
+                                    <i class="fas fa-brain"></i> ML CLASSIFIER METRICS
+                                </div>
+                                <div id="mlScoreContainer" class="text-2xl font-bold text-white mb-2"></div>
+                                <div id="mlFeatures" class="text-zinc-400 text-lg mb-4"></div>
+                            </div>
+
+                            <div class="border-t border-zinc-800/80 pt-4">
+                                <div class="text-amber-400 text-xl mb-2 flex items-center gap-2">
+                                    <i class="fas fa-route"></i> NETWORK ROUTING VERIFICATION
+                                </div>
+                                <div id="redirectChainContainer" class="text-zinc-400 text-md overflow-x-auto whitespace-pre-wrap font-mono max-h-32"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex gap-4 mt-6">
-                    <button onclick="resetForm()" 
-                            class="flex-1 border border-zinc-700 hover:border-emerald-500 py-4 text-xl transition">
+                    <button type="button" onclick="resetForm()" 
+                            class="flex-1 border border-zinc-700 hover:border-emerald-500 py-4 text-xl transition text-white">
                         SCAN ANOTHER
                     </button>
-                    <button onclick="window.location.reload()" 
-                            class="flex-1 bg-zinc-800 hover:bg-zinc-700 py-4 text-xl transition">
-                        <i class="fas fa-shield-alt"></i> REPORT TO THREAT DB (DEMO)
+                    <button type="button" onclick="window.location.reload()" 
+                            class="flex-1 bg-zinc-800 hover:bg-zinc-700 py-4 text-xl transition text-white">
+                        <i class="fas fa-shield-alt"></i> RESET HEURISTIC FRAMEWORK
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Footer Info -->
         <div class="mt-16 text-center text-xs text-zinc-500 space-y-2">
-            <p>⚠️ This is a heuristic tool. Always verify manually. False positives/negatives possible.</p>
-            <p>Built with ❤️ for cyber defense • Deployed on Vercel • Pure Python + Tailwind</p>
+            <p>⚠️ This is a hybrid rule-based &amp; empirical machine learning environment. False positives/negatives possible.</p>
+            <p>Built with ❤️ for cyber defense • Deployed on Vercel • Python/Flask Refactored Architecture</p>
             <p class="text-emerald-600">Made for large-scale project showcase • 2026</p>
         </div>
     </div>
 
     <script>
-        // Tailwind script already loaded via CDN
-        function initTailwind() {
-            // Already configured via CDN
-        }
-
-        // Matrix Rain Background
+        // Matrix Rain Background Logic
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.height = window.innerHeight;
@@ -170,7 +179,7 @@
             canvas.width = window.innerWidth;
         });
 
-        // Form handling
+        // Form Handling Configuration
         const form = document.getElementById('checkForm');
         const resultDiv = document.getElementById('result');
         const statusBadge = document.getElementById('statusBadge');
@@ -178,16 +187,19 @@
         const messageEl = document.getElementById('message');
         const reasonsList = document.getElementById('reasonsList');
         const statusCard = document.getElementById('statusCard');
+        const mlScoreContainer = document.getElementById('mlScoreContainer');
+        const mlFeatures = document.getElementById('mlFeatures');
+        const redirectChainContainer = document.getElementById('redirectChainContainer');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const url = document.getElementById('urlInput').value.trim();
             if (!url) return;
 
-            // Loading state
+            // Trigger scanner execution states
             const btn = document.getElementById('scanBtn');
             const originalText = btn.innerHTML;
-            btn.innerHTML = `<span class="animate-pulse">SCANNING...</span>`;
+            btn.innerHTML = `<span class="animate-pulse text-zinc-900">SCANNING MAPS...</span>`;
             btn.disabled = true;
 
             try {
@@ -200,40 +212,69 @@
 
                 if (data.error) throw new Error(data.error);
 
-                // Show result
+                // Reveal interface elements
                 resultDiv.classList.remove('hidden');
                 
-                // Status badge
+                // Mount Classification Parameters
                 statusBadge.textContent = data.status;
                 statusBadge.className = `px-8 py-3 text-4xl font-bold rounded-xl bg-${data.color}-900 text-${data.color}-400 border-4 border-${data.color}-500`;
                 
-                // Score
-                scoreEl.textContent = data.score + '%';
+                // Score Computation normalization
+                scoreEl.textContent = Math.round(data.score) + '%';
                 scoreEl.className = `text-7xl font-bold ${data.color === 'rose' ? 'text-rose-400' : data.color === 'amber' ? 'text-amber-400' : 'text-emerald-400'}`;
                 
-                // Message
+                // System Output Directives
                 messageEl.textContent = data.message;
                 messageEl.className = `text-3xl mb-8 font-bold ${data.color === 'rose' ? 'text-rose-400' : data.color === 'amber' ? 'text-amber-400' : 'text-emerald-400'}`;
                 
-                // Reasons
+                // Clear and render active structural heuristics (Filter to top 3 triggered flags)
                 reasonsList.innerHTML = '';
-                data.reasons.forEach(reason => {
-                    const li = document.createElement('li');
-                    li.className = 'flex items-start gap-3';
-                    li.innerHTML = `<span class="text-2xl mt-1">•</span><span>${reason}</span>`;
-                    reasonsList.appendChild(li);
-                });
+                const activeTriggers = data.heuristics_detail.filter(h => h.triggered).slice(0, 3);
 
-                // Card color
+                if (activeTriggers.length === 0) {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start gap-3 text-emerald-400';
+                    li.innerHTML = `<span class="text-2xl mt-1">•</span><span>✅ Operational heuristics clean. No signature triggers tripped.</span>`;
+                    reasonsList.appendChild(li);
+                } else {
+                    activeTriggers.forEach(h => {
+                        const li = document.createElement('li');
+                        li.className = 'flex items-start gap-3 text-rose-400';
+                        li.innerHTML = `<span class="text-2xl mt-1">•</span><span><strong>[${h.name}]</strong> ${h.evidence}</span>`;
+                        reasonsList.appendChild(li);
+                    });
+                }
+
+                // Render Version 1 ML Classifier Outputs
+                if (data.ml_data) {
+                    mlScoreContainer.innerHTML = `Probability Assessment: <span class="text-purple-400">${data.ml_data.score}% Phishing Likelihood</span>`;
+                    mlFeatures.innerHTML = `<strong>Top Driving Features:</strong> ${data.ml_data.top_features.join(', ') || 'None contextually verified'}`;
+                } else {
+                    mlScoreContainer.innerHTML = `<span class="text-zinc-600">Model offline</span>`;
+                    mlFeatures.innerHTML = '';
+                }
+
+                // Render Traceable Network Steps (Redirect Chain Tracking)
+                if (data.redirect_chain && data.redirect_chain.length > 1) {
+                    redirectChainContainer.className = "text-amber-500 font-mono text-sm space-y-1";
+                    redirectChainContainer.innerHTML = data.redirect_chain.map((link, idx) => `<div>[Hop ${idx}] ${link}</div>`).join('➔');
+                } else {
+                    redirectChainContainer.className = "text-zinc-500 font-mono text-sm";
+                    redirectChainContainer.textContent = "Direct Route Verified. No structural redirections encountered.";
+                }
+
+                // Set Container Box Borders
                 statusCard.className = `border-4 p-8 rounded-2xl transition-all border-${data.color}-500 bg-zinc-950`;
 
-                // Glitch effect on malicious
+                // Handle system alert visual triggers
                 if (data.status === 'MALICIOUS') {
                     statusBadge.classList.add('glitch');
+                } else {
+                    statusBadge.classList.remove('glitch');
                 }
 
             } catch (err) {
-                alert('Error: ' + err.message);
+                alert('Analysis Interrupted: ' + err.message);
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
@@ -246,7 +287,7 @@
             document.getElementById('urlInput').focus();
         }
 
-        // Keyboard shortcut
+        // Global hotkeys register
         document.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.getElementById('result').classList.contains('hidden')) {
                 e.preventDefault();
@@ -254,7 +295,6 @@
             }
         });
 
-        // Auto-focus input
         window.onload = () => {
             document.getElementById('urlInput').focus();
         };
